@@ -13,13 +13,68 @@ function countdown(initial, final = 0, interval = 1) {
 enum Completed {
     True = 1,
     False = 0
- }
+}
+
+function FnToDoService() {
+    this.todos = [];
+}
+
+FnToDoService.prototype.getAll = function () {
+    return this.todos;
+}
 
 interface ToDo {
     id: number;
     name: string;
     completed?: Completed;
 }
+
+class ToDoService   {
+
+    private static test: number = 0;
+    private _state: Completed;
+    // todos: ToDo[] = [];
+
+    // constructor(todos: ToDo[]) {
+    //     this.todos = todos;
+    // }
+
+    constructor(private todos: ToDo[] = []) {
+        ToDoService.test++;
+    }
+
+    public getAll() {
+        return this.todos;
+    }
+
+    public static getTest(): number {
+        return ToDoService.test;
+    }
+
+    public set state(newState: Completed) {
+        this._state = newState;
+    }
+
+    public get state() : Completed {
+        return this._state;
+    }
+
+}
+
+var todoitem = {
+
+    name: '123',
+    get state(): string {
+        return this._state;
+    },
+    set state(newState: string) {
+        this._state = newState
+    },
+}
+
+
+
+//ToDoService.test++;
 
 interface IToDoService {
     getById(id: number): ToDo;
